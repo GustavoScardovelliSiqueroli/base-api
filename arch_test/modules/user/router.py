@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from arch_test.core.dependencies.services_dependencies import get_user_service
+from arch_test.modules.user.dependencies import get_user_service
 from arch_test.modules.user.schemas import CreateUserSchema, PublicUserSchema
 from arch_test.modules.user.service import UserService
 from arch_test.shared.response_schemas import ApiResponse

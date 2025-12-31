@@ -6,4 +6,5 @@ T = TypeVar("T")
 
 
 class ApiResponse(BaseModel, Generic[T]):
+    success: bool = True
     data: T | None = None
