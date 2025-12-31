@@ -8,7 +8,7 @@ from arch_test.modules.user.repository import UserRepository
 users: list[User] = []
 
 
-class InMemoryUser(UserRepository):
+class InMemoryUserRepository(UserRepository):
     def get_all(self) -> Iterable[User]:
         return users
 
