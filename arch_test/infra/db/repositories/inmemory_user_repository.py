@@ -2,6 +2,7 @@ import uuid
 from typing import Any, Iterable
 from uuid import UUID
 
+from arch_test.core.exceptions import DuplicatedError
 from arch_test.modules.user.model import User
 from arch_test.modules.user.repository import UserRepository
 
@@ -18,6 +19,10 @@ class InMemoryUserRepository(UserRepository):
                 return user
 
     def create(self, data: User) -> User:
+        for user in users:
+            if user.login == data.login:
+                raise DuplicatedError("login")
+
         data.user_id = uuid.uuid4().hex
         users.append(data)
         return data
