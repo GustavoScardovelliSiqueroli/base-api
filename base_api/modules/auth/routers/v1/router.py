@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 
-from arch_test.modules.auth.dependencies import get_auth_service
-from arch_test.modules.auth.schemas import RegisterUserSchema
-from arch_test.modules.auth.service import AuthService
-from arch_test.modules.user.schemas import PublicUserSchema
-from arch_test.shared.response_schemas import ApiResponse
+from base_api.modules.auth.dependencies import get_auth_service
+from base_api.modules.auth.schemas import RegisterUserSchema
+from base_api.modules.auth.service import AuthService
+from base_api.modules.user.schemas import PublicUserSchema
+from base_api.shared.response_schemas import ApiResponse
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 

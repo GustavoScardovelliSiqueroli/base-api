@@ -1,7 +1,7 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from arch_test.core.exceptions import DomainException
+from base_api.core.exceptions import DomainException
 
 
 def domain_error_handler(_: Request, exc: DomainException) -> JSONResponse:

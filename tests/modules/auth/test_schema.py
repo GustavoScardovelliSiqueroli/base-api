@@ -3,7 +3,7 @@ import string
 import pytest
 from pydantic import ValidationError
 
-from arch_test.modules.auth.schemas import RegisterUserSchema
+from base_api.modules.auth.schemas import RegisterUserSchema
 
 VALID_LOGIN: str = "test"
 VALID_PASSWORD: str = "Test123@!"

@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-from arch_test.api.v1.router import router as router_v1
-from arch_test.core.errors_handlers import domain_error_handler
-from arch_test.core.exceptions import DomainException
+from base_api.api.v1.router import router as router_v1
+from base_api.core.errors_handlers import domain_error_handler
+from base_api.core.exceptions import DomainException
 
 
 def create_app() -> FastAPI:

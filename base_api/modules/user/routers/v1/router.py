@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from arch_test.modules.user.dependencies import get_user_service
-from arch_test.modules.user.schemas import PublicUserSchema
-from arch_test.modules.user.service import UserService
-from arch_test.shared.response_schemas import ApiResponse
+from base_api.modules.user.dependencies import get_user_service
+from base_api.modules.user.schemas import PublicUserSchema
+from base_api.modules.user.service import UserService
+from base_api.shared.response_schemas import ApiResponse
 
 router = APIRouter(prefix="/users", tags=["users"])
 

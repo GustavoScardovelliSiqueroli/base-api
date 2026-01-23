@@ -1,7 +1,7 @@
 from typing import Iterable
 
-from arch_test.modules.user.models import User
-from arch_test.modules.user.repository import UserRepository
+from base_api.modules.user.models import User
+from base_api.modules.user.repository import UserRepository
 
 
 class UserService:

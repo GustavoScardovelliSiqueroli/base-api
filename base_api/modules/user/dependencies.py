@@ -1,10 +1,10 @@
 from fastapi import Depends
 
-from arch_test.infra.db.repositories.inmemory_user_repository import (
+from base_api.infra.db.repositories.inmemory_user_repository import (
     InMemoryUserRepository,
 )
-from arch_test.modules.user.repository import UserRepository
-from arch_test.modules.user.service import UserService
+from base_api.modules.user.repository import UserRepository
+from base_api.modules.user.service import UserService
 
 
 def get_user_repository() -> UserRepository:
