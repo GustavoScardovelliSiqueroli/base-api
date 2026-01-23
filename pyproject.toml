@@ -6,14 +6,23 @@ authors = [
     {name = "gustavo",email = "gustavosecardovelli@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12, <4"
 dependencies = [
     "fastapi[standard] (>=0.128.0,<0.129.0)",
     "gunicorn (>=23.0.0,<24.0.0)",
-    "sqlalchemy (>=2.0.45,<3.0.0)"
+    "sqlalchemy (>=2.0.45,<3.0.0)",
+    "bcrypt (>=5.0.0,<6.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)",
+    "pytest-coverage (>=0.0,<0.1)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
+
+[tool.taskipy.tasks]
+test = "pytest -s -x --cov=arch_test -vv"
+post_test = 'coverage html'
