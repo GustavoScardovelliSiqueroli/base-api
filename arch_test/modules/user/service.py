@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from arch_test.modules.user.model import User
+from arch_test.modules.user.models import User
 from arch_test.modules.user.repository import UserRepository
 
 

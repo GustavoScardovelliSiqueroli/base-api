@@ -1,7 +1,7 @@
 from typing import Any, Iterable, Protocol
 from uuid import UUID
 
-from arch_test.modules.user.model import User
+from arch_test.modules.user.models import User
 
 
 class UserRepository(Protocol):

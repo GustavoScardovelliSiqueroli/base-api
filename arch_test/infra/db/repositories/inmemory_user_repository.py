@@ -3,7 +3,7 @@ from typing import Any, Iterable
 from uuid import UUID
 
 from arch_test.core.exceptions import DuplicatedError
-from arch_test.modules.user.model import User
+from arch_test.modules.user.models import User
 from arch_test.modules.user.repository import UserRepository
 
 users: list[User] = []

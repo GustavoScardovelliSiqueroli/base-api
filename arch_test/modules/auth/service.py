@@ -1,7 +1,7 @@
 import bcrypt
 
 from arch_test.modules.auth.schemas import RegisterUserSchema
-from arch_test.modules.user.model import User
+from arch_test.modules.user.models import User
 from arch_test.modules.user.repository import UserRepository
 
 
