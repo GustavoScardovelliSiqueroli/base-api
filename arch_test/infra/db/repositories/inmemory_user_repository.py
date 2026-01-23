@@ -23,7 +23,9 @@ class InMemoryUserRepository(UserRepository):
             if user.login == data.login:
                 raise DuplicatedError("login")
 
-        data.user_id = uuid.uuid4().hex
+        if not data.user_id:
+            data.user_id = uuid.uuid4()
+
         users.append(data)
         return data
 

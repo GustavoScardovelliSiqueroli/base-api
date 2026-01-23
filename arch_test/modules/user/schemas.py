@@ -1,3 +1,5 @@
+import uuid
+
 from pydantic import BaseModel, Field
 
 
@@ -7,7 +9,7 @@ class CreateUserSchema(BaseModel):
 
 
 class PublicUserSchema(BaseModel):
-    user_id: str
+    user_id: uuid.UUID
     login: str
 
     class Config:
