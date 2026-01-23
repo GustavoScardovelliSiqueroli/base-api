@@ -1,11 +1,6 @@
 import uuid
 
-from pydantic import BaseModel, Field
-
-
-class CreateUserSchema(BaseModel):
-    login: str = Field(min_length=4)
-    password: str = Field(min_length=8)
+from pydantic import BaseModel
 
 
 class PublicUserSchema(BaseModel):
