@@ -5,10 +5,10 @@ from base_api.modules.user.schemas import PublicUserSchema
 from base_api.modules.user.service import UserService
 from base_api.shared.response_schemas import ApiResponse
 
-router = APIRouter(prefix="/users", tags=["users"])
+router = APIRouter(prefix='/users', tags=['users'])
 
 
-@router.get("/", response_model=ApiResponse[list[PublicUserSchema]])
+@router.get('/', response_model=ApiResponse[list[PublicUserSchema]])
 def get_users(
     user_service: UserService = Depends(get_user_service),
 ) -> ApiResponse[list[PublicUserSchema]]:

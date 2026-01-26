@@ -7,7 +7,7 @@ from base_api.core.database import Base
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = 'users'
     user_id: Mapped[uuid.UUID] = mapped_column(
         CHAR(36), primary_key=True, default=lambda: uuid.uuid4()
     )

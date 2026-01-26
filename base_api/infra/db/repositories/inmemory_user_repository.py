@@ -13,7 +13,7 @@ class InMemoryUserRepository(UserRepository):
     def get_all(self) -> Iterable[User]:
         return users
 
-    def get_by_id(self, id: UUID):
+    def get_by_id(self, id: UUID) -> User | None:
         for user in users:
             if user.user_id == id:
                 return user
@@ -21,7 +21,7 @@ class InMemoryUserRepository(UserRepository):
     def create(self, data: User) -> User:
         for user in users:
             if user.login == data.login:
-                raise DuplicatedError("login")
+                raise DuplicatedError('login')
 
         if not data.user_id:
             data.user_id = uuid.uuid4()

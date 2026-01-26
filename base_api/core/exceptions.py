@@ -2,7 +2,8 @@ from enum import Enum
 
 
 class ErrorCode(str, Enum):
-    REC_DUPLICADO = "REC_DUPLICADO"
+    REC_DUPLICADO = 'REC_DUPLICADO'
+    AUTH_FAIL = 'AUTH_FAIL'
 
 
 class DomainException(Exception):
@@ -16,5 +17,10 @@ class DomainException(Exception):
 
 class DuplicatedError(DomainException):
     def __init__(self, column: str) -> None:
-        message = f"Já existe esse valor no campo {column}"
+        message = f'Já existe esse valor no campo {column}'
         super().__init__(message, ErrorCode.REC_DUPLICADO, 400)
+
+
+class AuthenticationError(DomainException):
+    def __init__(self, message: str = 'Autenticação falhou') -> None:
+        super().__init__(message, ErrorCode.AUTH_FAIL, 401)

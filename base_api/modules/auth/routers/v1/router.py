@@ -6,10 +6,10 @@ from base_api.modules.auth.service import AuthService
 from base_api.modules.user.schemas import PublicUserSchema
 from base_api.shared.response_schemas import ApiResponse
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(prefix='/auth', tags=['auth'])
 
 
-@router.post("/register", response_model=ApiResponse[PublicUserSchema])
+@router.post('/register', response_model=ApiResponse[PublicUserSchema])
 def register(
     data: RegisterUserSchema,
     auth_service: AuthService = Depends(get_auth_service),

@@ -1,30 +1,64 @@
 [project]
-name = "base-api"
-version = "0.1.0"
-description = "A base project to api applications FastAPI SQLAlchemy"
+name = 'base-api'
+version = '0.1.0'
+description = 'A base project to api applications FastAPI SQLAlchemy'
 authors = [
-    {name = "gustavo",email = "gustavosecardovelli@gmail.com"}
+    {name = 'gustavo',email = 'gustavosecardovelli@gmail.com'}
 ]
-readme = "README.md"
-requires-python = ">=3.12, <4"
+readme = 'README.md'
+requires-python = '>=3.12, <4'
 dependencies = [
-    "fastapi[standard] (>=0.128.0,<0.129.0)",
-    "gunicorn (>=23.0.0,<24.0.0)",
-    "sqlalchemy (>=2.0.45,<3.0.0)",
-    "bcrypt (>=5.0.0,<6.0.0)",
-    "taskipy (>=1.14.1,<2.0.0)",
-    "pytest-coverage (>=0.0,<0.1)",
-    "pydantic-settings (>=2.12.0,<3.0.0)",
-    "pyjwt (>=2.10.1,<3.0.0)"
+    'fastapi[standard] (>=0.128.0,<0.129.0)',
+    'gunicorn (>=23.0.0,<24.0.0)',
+    'sqlalchemy (>=2.0.45,<3.0.0)',
+    'bcrypt (>=5.0.0,<6.0.0)',
+    'taskipy (>=1.14.1,<2.0.0)',
+    'pytest-coverage (>=0.0,<0.1)',
+    'pydantic-settings (>=2.12.0,<3.0.0)',
+    'pyjwt (>=2.10.1,<3.0.0)'
 ]
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ['poetry-core>=2.0.0,<3.0.0']
+build-backend = 'poetry.core.masonry.api'
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^9.0.2"
+pytest = '^9.0.2'
 
 [tool.taskipy.tasks]
-test = "pytest -s -x --cov=base_api -vv"
+lint = 'ruff check . ; ruff check . --diff'
+format = 'ruff check . --fix ; ruff format .'
+test = 'pytest -s -x --cov=base_api -vv'
 post_test = 'coverage html'
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = 'py312'
+exclude = ['tests']
+
+[tool.ruff.format]
+quote-style = 'single'
+
+[tool.ruff.lint]
+extend-select = [
+    'E',  # Erros do pycodestyle (PEP 8)
+    'F',  # Erros do pyflakes
+    'W',  # Avisos do pycodestyle
+    'Q',  # Regras de aspas (flake8-quotes)
+    'I',  # Ordenação de imports (isort)
+    'C',  # Complexidade de código (mccabe)
+    'B',  # Bugs comuns (flake8-bugbear)
+    'ANN',
+    ]
+ignore = ['B008']
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = 'single'
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.pyright]
+ignore = [
+]
