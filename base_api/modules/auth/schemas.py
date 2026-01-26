@@ -4,6 +4,10 @@ from pydantic import BaseModel
 from pydantic.functional_validators import field_validator
 
 
+class LoginResponseSchema(BaseModel):
+    access_token: str
+
+
 class LoginUserSchema(BaseModel):
     login: str
     password: str
