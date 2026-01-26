@@ -18,6 +18,11 @@ class InMemoryUserRepository(UserRepository):
             if user.user_id == id:
                 return user
 
+    async def get_by_login(self, login: str) -> User | None:
+        for user in users:
+            if user.login == login:
+                return user
+
     async def create(self, data: User) -> User:
         for user in users:
             if user.login == data.login:
