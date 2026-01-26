@@ -15,17 +15,17 @@ class AuthService:
         self.user_repo = user_repo
         self.settings = settings
 
-    def login(self, data: LoginUserSchema) -> str:
-        user = self.user_repo.get_by_login(data.login)
+    async def login(self, data: LoginUserSchema) -> str:
+        user = await self.user_repo.get_by_login(data.login)
 
         if not user or not self._validate_password(data.password, user.password):
             raise AuthenticationError()
 
         return self._generate_jwt(user)
 
-    def register(self, data: RegisterUserSchema) -> User:
+    async def register(self, data: RegisterUserSchema) -> User:
         user = User(login=data.login, password=self._hash_password(data.password))
-        return self.user_repo.create(user)
+        return await self.user_repo.create(user)
 
     def _hash_password(self, password: str) -> str:
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -44,5 +44,7 @@ class AuthService:
             'exp': int(expire.timestamp()),
             'iat': int(now.timestamp()),
         }
-        token = jwt.encode(payload, self.settings.API_KEY, algorithm='HS256')  # type: ignore
+        token = jwt.encode(
+            payload, self.settings.API_KEY, algorithm=self.settings.JWT_ALGORITHM
+        )  # type: ignore
         return token

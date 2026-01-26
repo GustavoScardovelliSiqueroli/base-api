@@ -10,9 +10,9 @@ router = APIRouter(prefix='/auth', tags=['auth'])
 
 
 @router.post('/register', response_model=ApiResponse[PublicUserSchema])
-def register(
+async def register(
     data: RegisterUserSchema,
     auth_service: AuthService = Depends(get_auth_service),
 ) -> ApiResponse[PublicUserSchema]:
-    user = auth_service.register(data)
+    user = await auth_service.register(data)
     return ApiResponse(data=PublicUserSchema.model_validate(user))
