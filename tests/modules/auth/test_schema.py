@@ -5,18 +5,18 @@ from pydantic import ValidationError
 
 from base_api.modules.auth.schemas import RegisterUserSchema
 
-VALID_LOGIN: str = "test"
-VALID_PASSWORD: str = "Test123@!"
+VALID_LOGIN: str = 'test'
+VALID_PASSWORD: str = 'Test123@!'
 
 
 def test_user_password_need_8_characters():
     with pytest.raises(ValidationError):
-        RegisterUserSchema(login=VALID_LOGIN, password="1234567")
+        RegisterUserSchema(login=VALID_LOGIN, password='1234567')
 
 
 def test_user_password_need_number():
     with pytest.raises(ValidationError):
-        RegisterUserSchema(login=VALID_LOGIN, password="abcdefgh")
+        RegisterUserSchema(login=VALID_LOGIN, password='abcdefgh')
 
 
 def test_user_password_need_upper_char():
@@ -26,7 +26,7 @@ def test_user_password_need_upper_char():
 
 def test_user_password_need_special():
     special_chars = set(string.punctuation)
-    without_special = "".join("a" if c in special_chars else c for c in VALID_PASSWORD)
+    without_special = ''.join('a' if c in special_chars else c for c in VALID_PASSWORD)
 
     with pytest.raises(ValidationError):
         RegisterUserSchema(login=VALID_LOGIN, password=without_special)
