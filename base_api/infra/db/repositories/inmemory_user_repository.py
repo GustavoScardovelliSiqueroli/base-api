@@ -10,15 +10,15 @@ users: list[User] = []
 
 
 class InMemoryUserRepository(UserRepository):
-    def get_all(self) -> Iterable[User]:
+    async def get_all(self) -> Iterable[User]:
         return users
 
-    def get_by_id(self, id: UUID) -> User | None:
+    async def get_by_id(self, id: UUID) -> User | None:
         for user in users:
             if user.user_id == id:
                 return user
 
-    def create(self, data: User) -> User:
+    async def create(self, data: User) -> User:
         for user in users:
             if user.login == data.login:
                 raise DuplicatedError('login')
@@ -29,5 +29,5 @@ class InMemoryUserRepository(UserRepository):
         users.append(data)
         return data
 
-    def update(self, data: dict[str, Any]) -> User: ...
-    def delete(self) -> None: ...
+    async def update(self, data: dict[str, Any]) -> User: ...
+    async def delete(self) -> None: ...

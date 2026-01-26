@@ -9,8 +9,8 @@ router = APIRouter(prefix='/users', tags=['users'])
 
 
 @router.get('/', response_model=ApiResponse[list[PublicUserSchema]])
-def get_users(
+async def get_users(
     user_service: UserService = Depends(get_user_service),
 ) -> ApiResponse[list[PublicUserSchema]]:
-    users = user_service.get_all_users()
+    users = await user_service.get_all_users()
     return ApiResponse(data=[PublicUserSchema.model_validate(user) for user in users])
