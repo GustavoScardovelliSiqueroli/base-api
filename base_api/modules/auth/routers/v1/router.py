@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 
+from base_api.core.exceptions import AuthenticationError
 from base_api.modules.auth.dependencies import get_auth_service
 from base_api.modules.auth.schemas import (
     LoginResponseSchema,
@@ -13,7 +15,11 @@ from base_api.shared.response_schemas import ApiResponse
 router = APIRouter(prefix='/auth', tags=['auth'])
 
 
-@router.post('/register', response_model=ApiResponse[PublicUserSchema])
+@router.post(
+    '/register',
+    response_model=ApiResponse[PublicUserSchema],
+    status_code=status.HTTP_201_CREATED,
+)
 async def register(
     data: RegisterUserSchema,
     auth_service: AuthService = Depends(get_auth_service),
@@ -22,10 +28,18 @@ async def register(
     return ApiResponse(data=PublicUserSchema.model_validate(user))
 
 
-@router.post('/login', response_model=ApiResponse[LoginResponseSchema])
+@router.post('/login', response_model=LoginResponseSchema)
 async def login(
-    data: LoginUserSchema,
+    form_data: OAuth2PasswordRequestForm = Depends(),
     auth_service: AuthService = Depends(get_auth_service),
-) -> ApiResponse[LoginResponseSchema]:
-    token = await auth_service.login(data)
-    return ApiResponse(data=LoginResponseSchema(access_token=token))
+) -> LoginResponseSchema:
+    data = LoginUserSchema(login=form_data.username, password=form_data.password)
+    try:
+        token = await auth_service.login(data)
+    except AuthenticationError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail='Invalid credentials',
+            headers={'WWW-Authenticate': 'Bearer'},
+        ) from e
+    return LoginResponseSchema(access_token=token)

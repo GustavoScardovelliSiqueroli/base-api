@@ -6,6 +6,7 @@ from pydantic.functional_validators import field_validator
 
 class LoginResponseSchema(BaseModel):
     access_token: str
+    token_type: str = 'bearer'
 
 
 class LoginUserSchema(BaseModel):

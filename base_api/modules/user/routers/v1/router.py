@@ -1,11 +1,14 @@
 from fastapi import APIRouter, Depends
 
+from base_api.modules.auth.dependencies import get_current_user
 from base_api.modules.user.dependencies import get_user_service
 from base_api.modules.user.schemas import PublicUserSchema
 from base_api.modules.user.service import UserService
 from base_api.shared.response_schemas import ApiResponse
 
-router = APIRouter(prefix='/users', tags=['users'])
+router = APIRouter(
+    prefix='/users', tags=['users'], dependencies=[Depends(get_current_user)]
+)
 
 
 @router.get('/', response_model=ApiResponse[list[PublicUserSchema]])
