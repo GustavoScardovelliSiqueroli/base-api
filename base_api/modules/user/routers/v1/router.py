@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 
 from base_api.modules.auth.dependencies import get_current_user
 from base_api.modules.user.dependencies import get_user_service
@@ -11,7 +11,11 @@ router = APIRouter(
 )
 
 
-@router.get('/', response_model=ApiResponse[list[PublicUserSchema]])
+@router.get(
+    '/',
+    status_code=status.HTTP_200_OK,
+    response_model=ApiResponse[list[PublicUserSchema]],
+)
 async def get_users(
     user_service: UserService = Depends(get_user_service),
 ) -> ApiResponse[list[PublicUserSchema]]:
