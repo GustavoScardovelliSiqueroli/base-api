@@ -1,4 +1,4 @@
-from typing import Iterable
+from collections.abc import Iterable
 
 from base_api.modules.user.models import User
 from base_api.modules.user.repository import UserRepository

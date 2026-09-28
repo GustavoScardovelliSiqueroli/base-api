@@ -1,4 +1,5 @@
-from typing import Any, Iterable, Protocol
+from collections.abc import Iterable
+from typing import Any, Protocol
 from uuid import UUID
 
 from base_api.modules.user.models import User

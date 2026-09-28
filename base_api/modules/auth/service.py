@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import bcrypt
 import jwt
@@ -37,7 +37,7 @@ class AuthService:
         )
 
     def _generate_jwt(self, user: User) -> str:
-        now = datetime.now(tz=timezone.utc)
+        now = datetime.now(tz=UTC)
         expire = now + timedelta(hours=self.settings.ACCESS_TOKEN_EXPIRE_HOURS)
         payload = {
             'sub': str(user.user_id),

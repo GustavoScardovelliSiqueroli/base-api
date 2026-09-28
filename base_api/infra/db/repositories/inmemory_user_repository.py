@@ -1,5 +1,6 @@
 import uuid
-from typing import Any, Iterable
+from collections.abc import Iterable
+from typing import Any
 from uuid import UUID
 
 from base_api.core.exceptions import DuplicatedError
